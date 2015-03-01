@@ -65,7 +65,7 @@ var education = { //start education object
 
 /* Projects Object
 ==================================================*/
-var projects {
+var projects = {
 	"name" : "Udacity front-end developer nanodegree",
 	"date": "Jan 2015 - currently",
 	"description" : "Working on coding projects aimed at providing me the skills to become a web developer",
