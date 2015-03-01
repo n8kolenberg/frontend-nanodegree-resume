@@ -1,20 +1,83 @@
 
+/*Bio Object
+==================================================*/
 var bio = {
-	name : 'Nathaniel Kolenberg',
-	role : 'Web Developer',
-	contacts : {
-	email : 'nkolenberg@gmail.com',
-	mobile : '+44(0)747 277 1489',
-	github: 'n8kolenberg',
-	location: 'London, UK',
+	"name" : "Nathaniel Kolenberg",
+	"rol" : "Web Developer",
+	"contacts" : {
+	"email" : "nkolenberg@gmail.com",
+	"mobile" : "+44(0)747 277 1489",
+	"github" : "n8kolenberg",
+	"location" : "London, UK",
+}, //end contacts object
+	"bioPic" : "images/fry.jpg",
+	"welcomeMessage" : "Hi, my name is Nathaniel and I'm currently working on becoming a Web Develper",
+	"skills" : ['data analytics', 'programming', 'presenting', 'HTML', 'CSS', 'JS' ]
+}
 
-},
-	bioPic : "images/fry.jpg",
-	welcomeMessage : "Hi, my name is Nathaniel and I'm currently working on becoming a Web Develper",
-	skills : ['data analytics', 'programming', 'presenting', 'HTML', 'CSS', 'JS' ]
+/*Work Object using dot notation
+==================================================*/
+var work = {};
+work.workTitle = "Senior Analyst";
+work.employer = "Mobile Web Ads";
+work.yearsWorked = 1;
+work.workDates = "21/7/2014 - currently";
+work.workLocation = "London";
+work.workDescription = "Provide Analyses of Network Performance to Management";
+
+/*Education object using JSON
+==================================================*/
+var education = { //start education object
+	"school" : [ //start school array
+	{	"name"   : "Rotterdam School of Management",
+		"degree" : "Master of Science",
+		"city"	 : "Rotterdam",
+		"major"  : "Strategic Management",
+		"minor"  : "Corporate Finance",
+		"graduationDate" : "2010",
+		"yearsAttended"  : 2
+	},
+
+	{ "name"   : "Erasmus University Rotterdam",
+		"degree" : "Bachelor of Science",
+		"city"   : "Rotterdam",
+		"major"  : "International Business Administration",
+		"graduationDate" : "2008",
+		"yearsAttended"  : 3
+	}
+	], //end school array
+
+	"onlineCourses" : [ //start onlineCourses
+		{
+			"name" : "Udacity Front End Web Development Nanodegree",
+			"date" : "Jan 2015 - currently",
+			"url"	 : "https://www.udacity.com"
+		},
+		{
+			"name" : "Treehouse",
+			"date" : "September 2015 - currently",
+			"url"  : "https://www.teamtreehouse.com"
+		}
+
+	] //end onlineCourses array
+} // end education object
+
+
+/* Projects Object
+==================================================*/
+var projects {
+	"name" : "Udacity front-end developer nanodegree",
+	"date": "Jan 2015 - currently",
+	"description" : "Working on coding projects aimed at providing me the skills to become a web developer",
+	"projectImage" : "images/udacity.png"
 }
 
 
+
+
+
+/*Replacing general information data in HTML vars
+==================================================*/
 var formattedName = HTMLheaderName.replace('%data%', bio.name);
 var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
 var contactGeneric = HTMLcontactGeneric.replace('%data%', bio.contacts);
@@ -26,15 +89,41 @@ var bioPic = HTMLbioPic.replace('%data%', bio.bioPic);
 var welcomeMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
 var skills = HTMLskills.replace('%data%',bio.skills);
 
+/*Replacing work data in HTML vars
+==================================================*/
+var workEmployer = HTMLworkEmployer.replace('%data%', work.employer);
+var workTitle = HTMLworkTitle.replace('%data%', work.workTitle);
+var workDates = HTMLworkDates.replace('%data%', work.workDates);
+var workLocation = HTMLworkLocation.replace('%data%', work.workLocation);
+var workDescription = HTMLworkDescription.replace('%data%', work.workDescription);
 
+
+/*Replacing school data in HTML vars
+==================================================*/
+var schoolName = HTMLschoolName.replace('%data%', education.school[0].name);
+var schoolDegree = HTMLschoolDegree.replace('%data%', education.school[0].degree);
+
+
+/*Adding the information to the resume page
+==================================================*/
 $('#header').prepend(formattedRole);
 $('#header').prepend(formattedName);
 
 $('#header').append(bio.contacts.email);
 $('#header').prepend(bioPic);
 
+$('#header').append(workTitle);
+$('#header').append(workEmployer);
+$('#header').append(workDates);
+
+$('#header').append(schoolName);
+$('#header').append(schoolDegree);
 
 
+
+
+/* Copied the HTML string replace variables below from helper.js for arranging names above
+==================================================*/
 
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
 var HTMLheaderRole = '<span>%data%</span><hr/>';
@@ -46,19 +135,6 @@ var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span
 var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
 var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
 var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
-
-var HTMLbioPic = '<img src="%data%" class="biopic">';
-var HTMLWelcomeMsg = '<span class="welcome-message">%data%</span>';
-
-var HTMLskillsStart = '<h3 id="skillsH3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
-var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
-
-var HTMLworkStart = '<div class="work-entry"></div>';
-var HTMLworkEmployer = '<a href="#">%data%';
-var HTMLworkTitle = ' - %data%</a>';
-var HTMLworkDates = '<div class="date-text">%data%</div>';
-var HTMLworkLocation = '<div class="location-text">%data%</div>';
-var HTMLworkDescription = '<p><br>%data%</p>';
 
 var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
