@@ -3,7 +3,7 @@
 ==================================================*/
 var bio = {
 	"name" : "Nathaniel Kolenberg",
-	"rol" : "Web Developer",
+	"role" : "Web Developer",
 	"contacts" : {
 	"email" : "nkolenberg@gmail.com",
 	"mobile" : "+44(0)747 277 1489",
@@ -15,15 +15,41 @@ var bio = {
 	"skills" : ['data analytics', 'programming', 'presenting', 'HTML', 'CSS', 'JS' ]
 }
 
-/*Work Object using dot notation
+/*Work Object using JSON
 ==================================================*/
-var work = {};
-work.workTitle = "Senior Analyst";
-work.employer = "Mobile Web Ads";
-work.yearsWorked = 1;
-work.workDates = "21/7/2014 - currently";
-work.workLocation = "London";
-work.workDescription = "Provide Analyses of Network Performance to Management";
+var work = {
+	"jobs" : [
+		{
+			"title" : "Senior Analyst",
+			"employer" : "Mobile Web Ads",
+			"yearsWorked" : 1,
+			"workDates"	: "21/07/2014 - currently",
+			"workLocation" : "London",
+			"workDescription" : "Provide in depth Analysis of Network Performance to Management" 
+		},
+
+	 {
+			"title" : "Business Analyst",
+			"employer" : "Google",
+			"yearsWorked" : 1,
+			"workDates"	: "01/01/2012 - 31/12/2012",
+			"workLocation" : "Dublin",
+			"workDescription" : "Provide in depth Analysis of Product Performance to Management"
+
+		},
+
+		{
+			"title" : "Online Media Associate",
+			"employer" : "Google",
+			"yearsWorked" : 1.8,
+			"workDates"	: "17/05/2010 - 31/12/2011",
+			"workLocation" : "Dublin",
+			"workDescription" : "Account Management"
+		}
+ ] //end jobs array
+
+} // end work object
+
 
 /*Education object using JSON
 ==================================================*/
@@ -76,7 +102,7 @@ var projects = {
 
 
 
-/*Replacing general information data in HTML vars
+/*Replacing bio data in HTML vars
 ==================================================*/
 var formattedName = HTMLheaderName.replace('%data%', bio.name);
 var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
@@ -87,7 +113,43 @@ var github = HTMLgithub.replace('%data%', bio.contacts.github);
 var currentLocation = HTMLlocation.replace('%data%', bio.contacts.location);
 var bioPic = HTMLbioPic.replace('%data%', bio.bioPic);
 var welcomeMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
-var skills = HTMLskills.replace('%data%',bio.skills);
+var skills = HTMLskills.replace('%data%', bio.skills);
+
+
+/* If statement 
+(to check if there are skills in the bio object)
+==================================================*/
+if (bio.skills.length !== 0) {
+	$('#header').append(HTMLskillsStart);
+
+	/* Replacing skills data in HTML var and appending straight after */
+	for(var i = 0; i < bio.skills.length; i+=1) { 
+		var formattedSkills = HTMLskills.replace('%data%', bio.skills[i]);
+		$('#skills').append(formattedSkills);
+		} //end for loop
+
+} //end if statement
+
+/* For-in loop
+	(to add all jobs in work object to the page)
+==================================================*/
+for(job in work.jobs) {
+	$('#workExperience').append(HTMLworkStart);
+	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
+	var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
+	var formattedWorkDates = HTMLworkDates.replace('%data%', work.jobs[job].workDates);
+	var formattedWorkLocation = HTMLworkLocation.replace('%data%', work.jobs[job].workLocation);
+	var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[job].workDescription);
+	var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+	
+	$('.work-entry:last').append(formattedEmployerTitle);
+	$('.work-entry:last').append(formattedWorkDates);
+	$('.work-entry:last').append(formattedWorkLocation);
+	$('.work-entry:last').append(formattedWorkDescription);
+} // end for loop
+
+
 
 /*Replacing work data in HTML vars
 ==================================================*/
@@ -109,15 +171,9 @@ var schoolDegree = HTMLschoolDegree.replace('%data%', education.school[0].degree
 $('#header').prepend(formattedRole);
 $('#header').prepend(formattedName);
 
-$('#header').append(bio.contacts.email);
 $('#header').prepend(bioPic);
 
-$('#header').append(workTitle);
-$('#header').append(workEmployer);
-$('#header').append(workDates);
 
-$('#header').append(schoolName);
-$('#header').append(schoolDegree);
 
 
 
