@@ -144,11 +144,22 @@ ul {
   padding: 10px;
   width: 200px;
   display: none;
+  border-radius: 50px;
 }
 
 img {
   padding: 10px;
 }
+
+
+.projectImage {
+  height: 50%;
+  width: 60%;
+  margin: auto;
+}
+
+
+
 
 /* Bar chart stuff */
 .chart div {

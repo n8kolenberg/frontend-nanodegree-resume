@@ -4,12 +4,14 @@
 var bio = {
 	"name" : "Nathaniel Kolenberg",
 	"role" : "Web Developer",
+	
 	"contacts" : {
 	"email" : "nkolenberg@gmail.com",
 	"mobile" : "+44(0)747 277 1489",
 	"github" : "n8kolenberg",
 	"location" : "London, UK",
 }, //end contacts object
+
 	"bioPic" : "images/fry.jpg",
 	"welcomeMessage" : "Hi, my name is Nathaniel and I'm currently working on becoming a Web Develper",
 	"skills" : ['data analytics', 'programming', 'presenting', 'HTML', 'CSS', 'JS' ]
@@ -24,16 +26,26 @@ var work = {
 			"employer" : "Mobile Web Ads",
 			"yearsWorked" : 1,
 			"workDates"	: "21/07/2014 - currently",
-			"workLocation" : "London",
+			"location" : "London, UK",
 			"workDescription" : "Provide in depth Analysis of Network Performance to Management" 
 		},
+		
+		{
+			"title" : "Marketing Analyst",
+			"employer" : "Vistaprint",
+			"yearsWorked" : 1,
+			"workDates"	: "01/01/2013 - 31/12/2013",
+			"location" : "Barcelona, Spain",
+			"workDescription" : "Provide in depth Analysis of Product Performance to Management"
 
+		},
+	 
 	 {
 			"title" : "Business Analyst",
 			"employer" : "Google",
 			"yearsWorked" : 1,
 			"workDates"	: "01/01/2012 - 31/12/2012",
-			"workLocation" : "Dublin",
+			"location" : "Dublin, Ireland",
 			"workDescription" : "Provide in depth Analysis of Product Performance to Management"
 
 		},
@@ -43,21 +55,48 @@ var work = {
 			"employer" : "Google",
 			"yearsWorked" : 1.8,
 			"workDates"	: "17/05/2010 - 31/12/2011",
-			"workLocation" : "Dublin",
-			"workDescription" : "Account Management"
+			"location" : "Dublin, Ireland",
+			"workDescription" : "Growing the Google AdSense product userbase in the Netherlands primarily and the British Islands"
 		}
  ] //end jobs array
 
 } // end work object
 
+/* Function to display work on the page
+==================================================*/
+function displayWork(){
+
+	/* For-in loop
+		(to add all jobs in work object to the page) */
+	for(job in work.jobs) {
+		$('#workExperience').append(HTMLworkStart); //create a new Work div
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
+		var formattedWorkDates = HTMLworkDates.replace('%data%', work.jobs[job].workDates);
+		var formattedWorkLocation = HTMLworkLocation.replace('%data%', work.jobs[job].location);
+		var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[job].workDescription);
+		var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+		
+		$('.work-entry:last').append(formattedEmployerTitle);
+		$('.work-entry:last').append(formattedWorkDates);
+		$('.work-entry:last').append(formattedWorkLocation);
+		$('.work-entry:last').append(formattedWorkDescription);
+	} // end for loop
+} // end displayWork function
+
+displayWork();
+
+
+
 
 /*Education object using JSON
 ==================================================*/
 var education = { //start education object
-	"school" : [ //start school array
+	"schools" : [ //start school array
 	{	"name"   : "Rotterdam School of Management",
 		"degree" : "Master of Science",
-		"city"	 : "Rotterdam",
+		"location"	 : "Rotterdam, Netherlands",
 		"major"  : "Strategic Management",
 		"minor"  : "Corporate Finance",
 		"graduationDate" : "2010",
@@ -66,7 +105,7 @@ var education = { //start education object
 
 	{ "name"   : "Erasmus University Rotterdam",
 		"degree" : "Bachelor of Science",
-		"city"   : "Rotterdam",
+		"location"   : "Rotterdam, Netherlands",
 		"major"  : "International Business Administration",
 		"graduationDate" : "2008",
 		"yearsAttended"  : 3
@@ -92,14 +131,44 @@ var education = { //start education object
 /* Projects Object
 ==================================================*/
 var projects = {
-	"name" : "Udacity front-end developer nanodegree",
-	"date": "Jan 2015 - currently",
-	"description" : "Working on coding projects aimed at providing me the skills to become a web developer",
-	"projectImage" : "images/udacity.png"
-}
+		"projects" : [
+			{
+			"name" : "Udacity front-end developer nanodegree",
+			"date": "Jan 2015 - currently",
+			"description" : "Working on coding projects aimed at providing me the skills to become a web developer",
+			"projectImage" : "images/udacity.png"
+		},
+		{
+			"name" : "Business Society Management Study Trip",
+			"date": "April 2010",
+			"description" : "Project to investigate differences in sustainability efforts within companies in Dubai and Shanghai",
+			"projectImage" : "images/BSM.jpg"
+		}
+	] // end projects list
+}// end projects object
 
 
 
+function displayProjects() {
+	for (project in projects.projects) {
+		$("#projects").append(HTMLprojectStart);
+
+		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].name);
+		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects.projects[project].date);
+		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
+		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[project].projectImage);
+	
+	$('.project-entry:last').append(formattedProjectTitle);
+	$('.project-entry:last').append(formattedProjectDates);
+	$('.project-entry:last').append(formattedProjectDescription);
+	$('.project-entry:last').append(formattedProjectImage);
+
+	$("#projects img").addClass('projectImage');
+
+	} //end for loop
+} //end display function
+
+displayProjects();
 
 
 /*Replacing bio data in HTML vars
@@ -117,7 +186,8 @@ var skills = HTMLskills.replace('%data%', bio.skills);
 
 
 /* If statement 
-(to check if there are skills in the bio object)
+(to check if there are skills in the bio object
+and then append them to the page)
 ==================================================*/
 if (bio.skills.length !== 0) {
 	$('#header').append(HTMLskillsStart);
@@ -130,86 +200,68 @@ if (bio.skills.length !== 0) {
 
 } //end if statement
 
-/* For-in loop
-	(to add all jobs in work object to the page)
-==================================================*/
-for(job in work.jobs) {
-	$('#workExperience').append(HTMLworkStart);
-	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
-	var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
-	var formattedWorkDates = HTMLworkDates.replace('%data%', work.jobs[job].workDates);
-	var formattedWorkLocation = HTMLworkLocation.replace('%data%', work.jobs[job].workLocation);
-	var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[job].workDescription);
-	var formattedEmployerTitle = formattedEmployer + formattedTitle;
 
-	
-	$('.work-entry:last').append(formattedEmployerTitle);
-	$('.work-entry:last').append(formattedWorkDates);
-	$('.work-entry:last').append(formattedWorkLocation);
-	$('.work-entry:last').append(formattedWorkDescription);
-} // end for loop
-
-
-
-/*Replacing work data in HTML vars
-==================================================*/
-var workEmployer = HTMLworkEmployer.replace('%data%', work.employer);
-var workTitle = HTMLworkTitle.replace('%data%', work.workTitle);
-var workDates = HTMLworkDates.replace('%data%', work.workDates);
-var workLocation = HTMLworkLocation.replace('%data%', work.workLocation);
-var workDescription = HTMLworkDescription.replace('%data%', work.workDescription);
 
 
 /*Replacing school data in HTML vars
 ==================================================*/
-var schoolName = HTMLschoolName.replace('%data%', education.school[0].name);
-var schoolDegree = HTMLschoolDegree.replace('%data%', education.school[0].degree);
+var schoolName = HTMLschoolName.replace('%data%', education.schools[0].name);
+var schoolDegree = HTMLschoolDegree.replace('%data%', education.schools[0].degree);
 
 
 /*Adding the information to the resume page
 ==================================================*/
 $('#header').prepend(formattedRole);
 $('#header').prepend(formattedName);
-
 $('#header').prepend(bioPic);
 
 
-
-
-
-
-/* Copied the HTML string replace variables below from helper.js for arranging names above
+/* Function for logging clicks
 ==================================================*/
+function logClicks(x,y){
+	console.log("X: " + x + "; Y: " + y);
+} //end logClicks 
 
-var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr/>';
+	$(document).click(function(loc){
+		var x = loc.pageX;
+		var y = loc.pageY;
+		logClicks(x,y);
+	}); //end anonymous function to log clicks
 
-var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
 
-var HTMLprojectStart = '<div class="project-entry"></div>';
-var HTMLprojectTitle = '<a href="#">%data%</a>';
-var HTMLprojectDates = '<div class="date-text">%data%</div>';
-var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+/* Testing out locationizer function 
+to give me strings of locations I've worked in
+==================================================
+function locationizer(work_obj){
+	var localeArray = [];
+	for (job in work_obj.jobs) {
+		var newLocale = work_obj.jobs[job].workLocation;
+		localeArray.push(newLocale);
+	} //end for loop
+	return localeArray
+}// end locationizer function
 
-var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' -- %data%</a>';
-var HTMLschoolDates = '<div class="date-text">%data%</div>';
-var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+console.log(locationizer(work));
+*/
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
-var HTMLonlineTitle = '<a href="#">%data%';
-var HTMLonlineSchool = ' - %data%</a>';
-var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a href="#">%data%</a>';
+/* Function for internationalize button
+==================================================*/
+$('#main').append(internationalizeButton);
+function inName(name){
+	var nameArray = bio.name.trim().split(" ");
+	firstName = nameArray[0].slice(0,1).toUpperCase();
+	firstName += nameArray[0].slice(1).toLowerCase();
+	lastName = nameArray[1].toUpperCase();
+	name = firstName + " " + lastName;
+	return name;
+}
 
-var internationalizeButton = '<button>Internationalize</button>';
-var googleMap = '<div id="map"></div>';
+
+$('#mapDiv').append(googleMap);
+
+
+
+
+
+
+
