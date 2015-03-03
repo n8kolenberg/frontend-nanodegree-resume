@@ -99,7 +99,7 @@ var education = { //start education object
 		"location"	 : "Rotterdam, Netherlands",
 		"major"  : "Strategic Management",
 		"minor"  : "Corporate Finance",
-		"graduationDate" : "2010",
+		"graduationDate" : 2010,
 		"yearsAttended"  : 2
 	},
 
@@ -107,7 +107,7 @@ var education = { //start education object
 		"degree" : "Bachelor of Science",
 		"location"   : "Rotterdam, Netherlands",
 		"major"  : "International Business Administration",
-		"graduationDate" : "2008",
+		"graduationDate" : 2008,
 		"yearsAttended"  : 3
 	}
 	], //end school array
@@ -136,13 +136,20 @@ var projects = {
 			"name" : "Udacity front-end developer nanodegree",
 			"date": "Jan 2015 - currently",
 			"description" : "Working on coding projects aimed at providing me the skills to become a web developer",
-			"projectImage" : "images/udacity.png"
+			"projectImage" : 
+			[
+				"images/udacity.png",
+				"images/100.jpg"
+			]
 		},
 		{
 			"name" : "Business Society Management Study Trip",
 			"date": "April 2010",
 			"description" : "Project to investigate differences in sustainability efforts within companies in Dubai and Shanghai",
-			"projectImage" : "images/BSM.jpg"
+			"projectImage" :
+				[
+				"images/BSM.jpg"
+				]
 		}
 	] // end projects list
 }// end projects object
@@ -156,12 +163,17 @@ function displayProjects() {
 		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].name);
 		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects.projects[project].date);
 		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
-		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[project].projectImage);
-	
+		
 	$('.project-entry:last').append(formattedProjectTitle);
 	$('.project-entry:last').append(formattedProjectDates);
 	$('.project-entry:last').append(formattedProjectDescription);
-	$('.project-entry:last').append(formattedProjectImage);
+
+if (projects.projects[project].projectImage.length > 0) {
+	for (image in projects.projects[project].projectImage) {
+		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[project].projectImage[image]);
+		$('.project-entry:last').append(formattedProjectImage);
+	}
+} //end if statement to check if there are multiple pictures in the pictureImage array
 
 	$("#projects img").addClass('projectImage');
 
