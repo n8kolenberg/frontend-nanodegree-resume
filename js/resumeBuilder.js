@@ -17,7 +17,8 @@ var bio = {
 	"skills" : ['data analytics', 'programming', 'presenting', 'HTML', 'CSS', 'JS' ]
 }
 
-/*Work Object using JSON
+
+/*Work Object
 ==================================================*/
 var work = {
 	"jobs" : [
@@ -62,7 +63,7 @@ var work = {
 
 } // end work object
 
-/* Function to display work on the page
+/* Function to display Work on the page
 ==================================================*/
 function displayWork(){
 
@@ -90,7 +91,7 @@ displayWork();
 
 
 
-/*Education object using JSON
+/*Education object
 ==================================================*/
 var education = { //start education object
 	"schools" : [ //start school array
@@ -99,7 +100,7 @@ var education = { //start education object
 		"location"	 : "Rotterdam, Netherlands",
 		"major"  : "Strategic Management",
 		"minor"  : "Corporate Finance",
-		"graduationDate" : 2010,
+		"dates" : 2010,
 		"yearsAttended"  : 2
 	},
 
@@ -107,7 +108,7 @@ var education = { //start education object
 		"degree" : "Bachelor of Science",
 		"location"   : "Rotterdam, Netherlands",
 		"major"  : "International Business Administration",
-		"graduationDate" : 2008,
+		"dates" : 2008,
 		"yearsAttended"  : 3
 	}
 	], //end school array
@@ -115,12 +116,14 @@ var education = { //start education object
 	"onlineCourses" : [ //start onlineCourses
 		{
 			"name" : "Udacity Front End Web Development Nanodegree",
-			"date" : "Jan 2015 - currently",
+			"school" : "Udacity",
+			"date" : "2015",
 			"url"	 : "https://www.udacity.com"
 		},
 		{
-			"name" : "Treehouse",
-			"date" : "September 2015 - currently",
+			"name" : "Front End Web Developer Track",
+			"school" : "Treehouse",
+			"date" : "2015",
 			"url"  : "https://www.teamtreehouse.com"
 		}
 
@@ -128,7 +131,49 @@ var education = { //start education object
 } // end education object
 
 
-/* Projects Object
+
+/* Function to display Education on the page
+==================================================*/
+function displayEducation(){
+	for (schools in education.schools) {
+		$('#education').append(HTMLschoolStart);
+		var formattedSchoolName = HTMLschoolName.replace('%data%', education.schools[schools].name);
+		var formattedSchoolDegree = HTMLschoolDegree.replace('%data%', education.schools[schools].degree);
+		var formattedSchoolDates = HTMLschoolDates.replace('%data%', education.schools[schools].dates);
+		var formattedSchoolLocation = HTMLschoolLocation.replace('%data%', education.schools[schools].location);
+		var formattedSchoolMajor = HTMLschoolMajor.replace('%data%', education.schools[schools].major);
+
+		$('.education-entry:last').append(formattedSchoolName);
+		$('.education-entry:last').append(formattedSchoolLocation);
+		$('.education-entry:last').append(formattedSchoolMajor);
+		$('.education-entry:last').append(formattedSchoolDegree);
+		$('.education-entry:last').append(formattedSchoolDates);
+
+	} // end Schools for-loop
+
+	for (onlineCourse in education.onlineCourses) {
+		var formattedOnlineCourse = HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineCourse].name);
+		var formattedOnlineSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[onlineCourse].school);
+		var formattedOnlineDates = HTMLonlineDates.replace('%data%', education.onlineCourses[onlineCourse].date);
+		var formattedOnlineURL = HTMLonlineURL.replace('%data%', education.onlineCourses[onlineCourse].url);
+
+		$('.education-entry:last').append(HTMLonlineClasses);
+		$('.education-entry:last').append(formattedOnlineCourse);
+		$('.education-entry:last').append(formattedOnlineSchool);
+		$('.education-entry:last').append(formattedOnlineDates);
+		$('.education-entry:last').append(formattedOnlineURL);
+
+	} //end onlineCourses for-loop
+
+} // end displayEducation function
+
+displayEducation();
+
+
+
+
+
+/* Projects Object using JSON
 ==================================================*/
 var projects = {
 		"projects" : [
