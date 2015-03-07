@@ -160,8 +160,6 @@ img {
 }
 
 
-
-
 /* Bar chart stuff */
 .chart div {
   font: 10px sans-serif;
@@ -178,9 +176,18 @@ span {
   padding: 5px;
 }
 
+.welcome-message {
+  font-size: 0.95em;
+}
+
 #letsConnect {
   text-align: center;
 }
+
+
+
+
+
 
 @media only screen and (max-width: 1024px) {
   #letsConnect {
@@ -221,7 +228,11 @@ span {
 
 @media only screen and (min-width: 750px) {
   #skillsH3,
-  .biopic {
+  .biopic{
     display: block;
+  }
+
+  #skills {
+    display: inline-block;
   }
 }

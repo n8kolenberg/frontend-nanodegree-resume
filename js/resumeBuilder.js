@@ -5,17 +5,72 @@ var bio = {
 	"name" : "Nathaniel Kolenberg",
 	"role" : "Web Developer",
 	
-	"contacts" : {
-	"email" : "nkolenberg@gmail.com",
-	"mobile" : "+44(0)747 277 1489",
-	"github" : "n8kolenberg",
-	"location" : "London, UK",
-}, //end contacts object
-
+	"contacts" :
+		{
+		"email" : "nkolenberg@gmail.com",
+		"twitter" : "@nkolenberg",
+		"mobile" : "+44(0)747 277 1489",
+		"github" : "n8kolenberg",
+		"location" : "London, UK",
+		}, //end contacts object
 	"bioPic" : "images/fry.jpg",
-	"welcomeMessage" : "Hi, my name is Nathaniel and I'm currently working on becoming a Web Develper",
-	"skills" : ['data analytics', 'programming', 'presenting', 'HTML', 'CSS', 'JS' ]
+	"welcomeMessage" : "Hi, my name is Nathaniel and I'm currently working on becoming a Web Developer",
+	"skills" : ['Analytics', 'HTML', 'CSS', 'JS' ]
 }
+
+/* Function to display Bio on the page
+==================================================*/
+function displayBio() {
+
+		var formattedName = HTMLheaderName.replace('%data%', bio.name);
+		var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+		var bioPic = HTMLbioPic.replace('%data%', bio.bioPic);	
+		var formattedBioWelcomeMsg = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
+		var formattedBioMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+		var formattedBioEmail = HTMLemail.replace('%data%', bio.contacts.email);
+		var formattedBioGithub = HTMLgithub.replace('%data%', bio.contacts.github);
+		var formattedBioLocation = HTMLlocation.replace('%data%', bio.contacts.location);
+
+		$('#header').prepend(formattedRole);
+		$('#header').prepend(formattedName);
+		$('#header').append(bioPic);
+		$('#header').append(formattedBioWelcomeMsg);
+		
+		$('#topContacts, #footerContacts').append(formattedBioMobile);
+		$('#topContacts:last, #footerContacts:last').append(formattedBioEmail);
+		$('#topContacts:last, #footerContacts:last').append(formattedBioGithub);
+		$('#topContacts:last, #footerContacts:last').append(formattedBioLocation);
+	
+
+		/* If statement 
+		(to check if there are skills in the bio object
+		and then append them to the page)
+		==================================================*/
+		if (bio.skills.length !== 0) {
+			$('#header').append(HTMLskillsStart);
+
+			/* Replacing skills data in HTML var and appending straight after */
+			for(var i = 0; i < bio.skills.length; i+=1) { 
+				var formattedSkills = HTMLskills.replace('%data%', bio.skills[i]);
+				$('#skills').append(formattedSkills);
+				} //end for loop
+		} //end if statement
+
+} // end displayBio() function
+
+displayBio();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*Work Object
@@ -193,7 +248,7 @@ var projects = {
 			"description" : "Project to investigate differences in sustainability efforts within companies in Dubai and Shanghai",
 			"projectImage" :
 				[
-				"images/BSM.jpg"
+				"images/whaleVsSub.png"
 				]
 		}
 	] // end projects list
@@ -228,49 +283,7 @@ if (projects.projects[project].projectImage.length > 0) {
 displayProjects();
 
 
-/*Replacing bio data in HTML vars
-==================================================*/
-var formattedName = HTMLheaderName.replace('%data%', bio.name);
-var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-var contactGeneric = HTMLcontactGeneric.replace('%data%', bio.contacts);
-var mobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-var email = HTMLemail.replace('%data%', bio.contacts.email);
-var github = HTMLgithub.replace('%data%', bio.contacts.github);
-var currentLocation = HTMLlocation.replace('%data%', bio.contacts.location);
-var bioPic = HTMLbioPic.replace('%data%', bio.bioPic);
-var welcomeMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
-var skills = HTMLskills.replace('%data%', bio.skills);
 
-
-/* If statement 
-(to check if there are skills in the bio object
-and then append them to the page)
-==================================================*/
-if (bio.skills.length !== 0) {
-	$('#header').append(HTMLskillsStart);
-
-	/* Replacing skills data in HTML var and appending straight after */
-	for(var i = 0; i < bio.skills.length; i+=1) { 
-		var formattedSkills = HTMLskills.replace('%data%', bio.skills[i]);
-		$('#skills').append(formattedSkills);
-		} //end for loop
-
-} //end if statement
-
-
-
-
-/*Replacing school data in HTML vars
-==================================================*/
-var schoolName = HTMLschoolName.replace('%data%', education.schools[0].name);
-var schoolDegree = HTMLschoolDegree.replace('%data%', education.schools[0].degree);
-
-
-/*Adding the information to the resume page
-==================================================*/
-$('#header').prepend(formattedRole);
-$('#header').prepend(formattedName);
-$('#header').prepend(bioPic);
 
 
 /* Function for logging clicks
