@@ -61,18 +61,6 @@ function displayBio() {
 displayBio();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*Work Object
 ==================================================*/
 var work = {
@@ -133,7 +121,6 @@ function displayWork(){
 		var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[job].workDescription);
 		var formattedEmployerTitle = formattedEmployer + formattedTitle;
 
-		
 		$('.work-entry:last').append(formattedEmployerTitle);
 		$('.work-entry:last').append(formattedWorkDates);
 		$('.work-entry:last').append(formattedWorkLocation);
@@ -142,7 +129,6 @@ function displayWork(){
 } // end displayWork function
 
 displayWork();
-
 
 
 
@@ -168,7 +154,7 @@ var education = { //start education object
 	}
 	], //end school array
 
-	"onlineCourses" : [ //start onlineCourses
+	"onlineCourses" : [ //start onlineCourses array
 		{
 			"name" : "Udacity Front End Web Development Nanodegree",
 			"school" : "Udacity",
@@ -227,7 +213,6 @@ displayEducation();
 
 
 
-
 /* Projects Object using JSON
 ==================================================*/
 var projects = {
@@ -239,7 +224,7 @@ var projects = {
 			"projectImage" : 
 			[
 				"images/udacity.png",
-				"images/100.jpg"
+				"images/100.png"
 			]
 		},
 		{
@@ -263,40 +248,24 @@ function displayProjects() {
 		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].name);
 		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects.projects[project].date);
 		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
-		
-	$('.project-entry:last').append(formattedProjectTitle);
-	$('.project-entry:last').append(formattedProjectDates);
-	$('.project-entry:last').append(formattedProjectDescription);
+			
+		$('.project-entry:last').append(formattedProjectTitle);
+		$('.project-entry:last').append(formattedProjectDates);
+		$('.project-entry:last').append(formattedProjectDescription);
 
-if (projects.projects[project].projectImage.length > 0) {
-	for (image in projects.projects[project].projectImage) {
-		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[project].projectImage[image]);
-		$('.project-entry:last').append(formattedProjectImage);
-	}
-} //end if statement to check if there are multiple pictures in the pictureImage array
+	if (projects.projects[project].projectImage.length > 0) {
+		for (image in projects.projects[project].projectImage) {
+			var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[project].projectImage[image]);
+			$('.project-entry:last').append(formattedProjectImage);
+		}
+	} //end if statement to check if there are multiple pictures in the pictureImage array
 
-	$("#projects img").addClass('projectImage');
+		$("#projects img").addClass('projectImage');
 
 	} //end for loop
 } //end display function
 
 displayProjects();
-
-
-
-
-
-/* Function for logging clicks
-==================================================*/
-function logClicks(x,y){
-	console.log("X: " + x + "; Y: " + y);
-} //end logClicks 
-
-	$(document).click(function(loc){
-		var x = loc.pageX;
-		var y = loc.pageY;
-		logClicks(x,y);
-	}); //end anonymous function to log clicks
 
 
 /* Testing out locationizer function 
@@ -316,15 +285,15 @@ console.log(locationizer(work));
 
 /* Function for internationalize button
 ==================================================*/
-$('#main').append(internationalizeButton);
-function inName(name){
-	var nameArray = bio.name.trim().split(" ");
-	firstName = nameArray[0].slice(0,1).toUpperCase();
-	firstName += nameArray[0].slice(1).toLowerCase();
-	lastName = nameArray[1].toUpperCase();
-	name = firstName + " " + lastName;
-	return name;
-}
+// $('#main').append(internationalizeButton);
+// function inName(name){
+// 	var nameArray = bio.name.trim().split(" ");
+// 	firstName = nameArray[0].slice(0,1).toUpperCase();
+// 	firstName += nameArray[0].slice(1).toLowerCase();
+// 	lastName = nameArray[1].toUpperCase();
+// 	name = firstName + " " + lastName;
+// 	return name;
+// }
 
 
 $('#mapDiv').append(googleMap);

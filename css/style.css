@@ -4,6 +4,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+#main, #mapDiv {
+  background-image: url('../images/gplaypattern.png');
+}
+
+#workExperience, #education {
+  background-image: url('../images/food.png');
+}
+
+
 .clearfix {
   overflow: auto;
 }
@@ -155,8 +164,9 @@ img {
 
 .projectImage {
   height: 50%;
-  width: 60%;
+  width: 100%;
   margin: auto;
+  text-align: center;
 }
 
 
@@ -183,9 +193,6 @@ span {
 #letsConnect {
   text-align: center;
 }
-
-
-
 
 
 
